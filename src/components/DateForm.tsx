@@ -10,7 +10,7 @@ export interface IFormInput {
   year: number;
 }
 
-// Props atualizadas: O componente agora recebe todo o controlo do formulário do componente pai
+// Props atualizadas: O componente agora recebe todo o controle do formulário do componente pai
 interface DateFormProps {
   handleSubmit: (onSubmit: SubmitHandler<IFormInput>) => (e?: React.BaseSyntheticEvent) => Promise<void>;
   onFormSubmit: SubmitHandler<IFormInput>;

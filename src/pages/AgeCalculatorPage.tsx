@@ -9,9 +9,10 @@ interface Age {
 }
 
 const AgeCalculatorPage = () => {
+  // O useState é o responsável por armazenar o resultado do cálculo
   const [age, setAge] = useState<Age>({ years: null, months: null, days: null });
   
-  // O hook useForm agora vive aqui e controla todo o estado do formulário.
+  // O useForm é o responsável por gerenciar todo o estado do formulário
   const {
     register,
     handleSubmit,
@@ -20,6 +21,7 @@ const AgeCalculatorPage = () => {
     clearErrors,
   } = useForm<IFormInput>();
 
+  // O useCallback é o responsável pela reutilização da função
   const calculateAge = useCallback((birthDate: Date): Age => {
     const today = new Date();
     let years = today.getFullYear() - birthDate.getFullYear();
@@ -37,7 +39,7 @@ const AgeCalculatorPage = () => {
     return { years, months, days };
   }, []);
 
-  // Esta função agora contém TODA a lógica de validação.
+  // Esta função agora contém a lógica de validação.
   const handleCalculateAge: SubmitHandler<IFormInput> = (data) => {
     clearErrors();
     const { day, month, year } = data;
@@ -59,7 +61,7 @@ const AgeCalculatorPage = () => {
       isValid = false;
     }
     
-    // Se a data for inválida, limpa os resultados e pára a execução.
+    // Se a data for inválida, limpa os resultados e para a execução.
     if (!isValid) {
       setAge({ years: null, months: null, days: null });
       return;
@@ -72,7 +74,7 @@ const AgeCalculatorPage = () => {
   return (
     <div className="bg-white rounded-3xl rounded-br-[100px] md:rounded-br-[150px] p-8 shadow-lg max-w-2xl w-full">
       <h2 className="text-xl font-bold mb-4 text-gray-700">Age Calculator</h2>
-      {/* Passamos todas as funções e estados do formulário para o componente DateForm */}
+      {/* Passa todas as funções e estados do formulário para o componente DateForm */}
       <DateForm
         handleSubmit={handleSubmit}
         onFormSubmit={handleCalculateAge}
